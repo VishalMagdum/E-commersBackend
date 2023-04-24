@@ -4,7 +4,7 @@ const productControllers = require('../controllers/productControllers')
 const auth = require("../common/auth")
 
 // add new product
-router.post('/add-product', auth.validate, auth.roleAdmin, productControllers.createProduct)
+router.post('/add-product/:id', auth.validate, auth.roleAdmin, productControllers.createProduct)
 
 // get all products
 router.get('/all-products', productControllers.getAllProducts)
@@ -21,7 +21,7 @@ router.delete('/remove-product/:id', auth.validate, auth.roleAdmin, productContr
 // get product by id
 router.get('/product/:id', productControllers.getproductbyId)
 
-router.put('/product-review', auth.validate, productControllers.createReview)
+router.put('/product-review/:id/:name', auth.validate, productControllers.createReview)
 
 router.get('/get-product-reviews', auth.validate, productControllers.getAllReviews)
 
