@@ -22,7 +22,7 @@ const placeOrder = async function (req, res, next) {
             shippingPrice,
             totalPrice,
             paidAt: Date.now(),
-            user: req.user.id,
+            user: req.params.id,
         });
         res.status(201).send({ message: "Order Placed successfully", order, success: true })
     } catch (error) {
@@ -48,7 +48,7 @@ const individualOrder = async function (req, res, next) {
 // get users order details
 const usersOrder = async function (req, res, next) {
     try {
-        const orders = await ordersModel.find({ user: req.user.id })
+        const orders = await ordersModel.find({ user: req.params.id })
 
         res.status(200).send({ orders })
     } catch (error) {
