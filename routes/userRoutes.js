@@ -15,11 +15,11 @@ router.post('/password/reset', userControllers.forgotPassword)
 
 router.put('/resetpassword/:token', userControllers.resetPassword)
 
-router.get('/profile', auth.validate, userControllers.userDetails)
+router.get('/profile/:id', auth.validate, userControllers.userDetails)
 
-router.put('/change-password', auth.validate, userControllers.changePassword)
+router.put('/change-password/:id', auth.validate, userControllers.changePassword)
 
-router.put('/profile/update', auth.validate, userControllers.updateProfile)
+router.put('/profile/update/:id', auth.validate, userControllers.updateProfile)
 
 router.get('/admin/users', userControllers.allUser)
 
