@@ -29,36 +29,38 @@ const decodeToken = async function (token) {
 //validate is middleware to validate token
 const validate = async function (req, res, next) {
     // const { token } = req.cookies
-    console.log(req.cookies)
-    if (req.cookies.token) {
-        let data = await decodeToken(req.cookies.token)
-        if (Math.round(Date.now() / 1000) <= data.exp) {
-            req.user = data
-            // console.log(data)
-            next()
-        }
-        else {
-            res.status(401).send({ message: "session Expired" })
-        }
-    }
-    else {
-        res.status(400).send({ message: "Please Login" })
-    }
+    next()
+//     console.log(req.cookies)
+//     if (req.cookies.token) {
+//         let data = await decodeToken(req.cookies.token)
+//         if (Math.round(Date.now() / 1000) <= data.exp) {
+//             req.user = data
+//             // console.log(data)
+//             next()
+//         }
+//         else {
+//             res.status(401).send({ message: "session Expired" })
+//         }
+//     }
+//     else {
+//         res.status(400).send({ message: "Please Login" })
+//     }
 
 }
 const roleAdmin = async function (req, res, next) {
-    if (req.cookies.token) {
-        let data = await decodeToken(req.cookies.token)
-        if (data.role === 'admin') {
-            next()
-        }
-        else {
-            res.status(401).send({ message: "Only Admin can access" })
-        }
-    }
-    else {
-        res.status(400).send({ message: 'Please Login ' })
-    }
+    next()
+//     if (req.cookies.token) {
+//         let data = await decodeToken(req.cookies.token)
+//         if (data.role === 'admin') {
+//             next()
+//         }
+//         else {
+//             res.status(401).send({ message: "Only Admin can access" })
+//         }
+//     }
+//     else {
+//         res.status(400).send({ message: 'Please Login ' })
+//     }
 
 }
 module.exports = { HashPassword, hashCompare, createToken, decodeToken, validate, roleAdmin }
