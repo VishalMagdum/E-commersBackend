@@ -58,7 +58,7 @@ const logIn = async function (req, res, next) {
                         role: user.role
                     })
 
-                    res.status(200).cookie("token", token, { httpOnly: true }).send({ message: "User Login successfull", token, user })
+                    res.status(200).cookie("token", token).send({ message: "User Login successfull", token, user })
 
 
                 }
@@ -84,8 +84,8 @@ const logIn = async function (req, res, next) {
 const logOut = async function (req, res, next) {
     try {
         res.cookie("token", null, {
-            expires: new Date(Date.now()),
-            httpOnly: true
+            expires: new Date(Date.now())
+           
         })
 
         res.status(200).send({ message: "Logged Out" })
