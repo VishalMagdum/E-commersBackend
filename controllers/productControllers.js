@@ -27,7 +27,7 @@ const createProduct = async function (req, res, next) {
         }
         req.body.image = imagesLink
         // console.log(req.body.image)
-        req.body.user = req.user.id
+        req.body.user = req.params.id
         const product = await productsModel.create(req.body);
         res.status(201).send({
             success: true, message: "Product Added successful",
@@ -169,8 +169,8 @@ const createReview = async function (req, res, next) {
         const { rating, comment, productId } = req.body
 
         const review = {
-            user: req.user.id,
-            name: req.user.name,
+            user: req.params.id,
+            name: req.params.name,
             rating: Number(rating),
             comment,
         }
