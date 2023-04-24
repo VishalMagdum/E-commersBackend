@@ -167,7 +167,7 @@ const resetPassword = async function (req, res, next) {
 
 const userDetails = async function (req, res, next) {
     try {
-        const user = await usersModel.findById(req.user.id)
+        const user = await usersModel.findById(req.params.id)
         res.status(200).send({ user })
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error", error })
@@ -177,7 +177,7 @@ const userDetails = async function (req, res, next) {
 
 const changePassword = async function (req, res, next) {
     try {
-        const user = await usersModel.findById(req.user.id).select("+password")
+        const user = await usersModel.findById(req.params.id).select("+password")
         if (await auth.hashCompare(req.body.oldPassword, user.password)) {
             if (req.body.newPassword === req.body.confirmPassword) {
                 user.password = await auth.HashPassword(req.body.newPassword)
@@ -214,7 +214,7 @@ const updateProfile = async function (req, res, next) {
 
         if (req.body.avatar !== "") {
 
-            const user = await usersModel.findById(req.user.id);
+            const user = await usersModel.findById(req.params.id);
 
             const imageId = user.profile_img.img_id;
 
@@ -240,7 +240,7 @@ const updateProfile = async function (req, res, next) {
         }
 
 
-        const user = await usersModel.findByIdAndUpdate(req.user.id, newUserDetails, {
+        const user = await usersModel.findByIdAndUpdate(req.params.id, newUserDetails, {
             new: true,
             runValidators: true,
             useFindAndModify: false
