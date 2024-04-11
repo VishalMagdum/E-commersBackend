@@ -4,7 +4,7 @@ const productControllers = require('../controllers/productControllers')
 const auth = require("../common/auth")
 
 // add new product
-router.post('/add-product/:id', auth.validate, auth.roleAdmin, productControllers.createProduct)
+router.post('/add-product', auth.validate, auth.roleAdmin, productControllers.createProduct)
 
 // get all products
 router.get('/all-products', productControllers.getAllProducts)
